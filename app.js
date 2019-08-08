@@ -10,6 +10,9 @@ const port = process.env.PORT || 3000;
 const Book = require('./models/bookModel');
 const bookRouter = require('./routes/bookRouter')(Book);
 
+
+// use is a keyword that tells a client (app in this case) to use a piece of middleware. 
+// we use middleware to inject a small task inbetween a client/server request/response. 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
