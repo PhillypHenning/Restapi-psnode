@@ -12,20 +12,23 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "gyp": "^0.5.0",
+    "mongoose": "^5.6.9",
+    "node-gyp": "^5.0.3",
     "nodemon": "^1.19.1"
   },
   "devDependencies": {
     "eslint": "^6.1.0"
   },
-  "nodemonConfig":{
-     "restartable": "rs",
-     "ignore": [
-        "node_modules/**/node_modules"
-     ],
-     "delay": "2500",
-     "env": {
-        "NODE_ENV": "development",
-	      "PORT": 4000
-     }
+  "nodemonConfig": {
+    "restartable": "rs",
+    "ignore": [
+      "node_modules/**/node_modules"
+    ],
+    "delay": "2500",
+    "env": {
+      "NODE_ENV": "development",
+      "PORT": 4000
+    }
   }
 }
