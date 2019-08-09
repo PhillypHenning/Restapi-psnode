@@ -23,17 +23,36 @@ function bookController(Book){
         if(req.query.language){
             query.language = req.query.language;
         }
+        else if(req.query.country){
+            query.country = req.query.country;
+        }
 
         // Book is being exported from the bookModel file which makes it callable here.
         Book.find(query, (err, books) => {
             if(err){
                 return res.send(err);
             }
-            return res.json(books);
+            const returnBooks = books.map((book) => {
+                // Adds (map) a self refrence link to each book within the books array.
+                const newBook = book.toJSON();
+                newBook.links = {};
+                newBook.links.self = `http://${req.headers.host}/api/books/${book._id}`;
+                return newBook;
+            }) 
+            return res.json(returnBooks);
         });
     }
 
-    function getById(req, res){ res.json(req.book); }
+    function getById(req, res){ 
+        const returnBook = req.book.toJSON();
+
+        returnBook.links = {}
+        const language = req.book.language.replace(' ', '%20');
+        const country = req.book.country.replace(' ', '%20');
+        returnBook.links.FilterByThisLanguage = `http://${req.headers.host}/api/books/?language=${language}`;
+        returnBook.links.FilterByThisCountry = `http://${req.headers.host}/api/books/?country=${country}`;
+        
+        res.json(returnBook); }
 
     function put(req, res){
         // This is a great example of the Middleware. As you can see book is already available within the request. This is because of the above middleware. 
