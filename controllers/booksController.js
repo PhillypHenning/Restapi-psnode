@@ -4,7 +4,8 @@ function bookController(Book){
     
         console.log(book);
         book.save();
-        return res.status(201).json(book)
+        res.status(201);
+        return res.json(book);
         };
     
     function get(req, res) {
@@ -32,6 +33,8 @@ function bookController(Book){
     function put(req, res){
         // This is a great example of the Middleware. As you can see book is already available within the request. This is because of the above middleware. 
         const { book } = req;
+
+        // TODO: use the foreach built in function to better add data here
         book.title = req.body.title;
         book.author = req.body.author;
         book.country = req.body.country;
